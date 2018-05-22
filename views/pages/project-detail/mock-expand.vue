@@ -2,6 +2,8 @@
   <div class="em-mock-expand">
     <h2>Method</h2>
     <p>{{mock.method}}</p>
+    <h2>TAG</h2>
+    <p>{{mock.tags}}</p>
     <h2>URL</h2>
     <p>{{mock.url}}</p>
     <h2>{{$t('p.detail.expand.description')}}</h2>
