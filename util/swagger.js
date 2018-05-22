@@ -43,12 +43,15 @@ async function createMock (projectId, swaggerDocs) {
         })
       )
 
+      const tags = operation.tags
+
       /* istanbul ignore else */
       if (!api) {
         newAPIs.push({
           mode,
           method,
           url: fullAPIPath,
+          tags: tags,
           parameters,
           response_model: responseModel,
           description: desc,
@@ -70,6 +73,7 @@ async function createMock (projectId, swaggerDocs) {
       api.method = method
       api.url = fullAPIPath
       api.description = desc
+      api.tags = tags
       api.parameters = parameters
       api.response_model = responseModel
       newKeys = newKeys.filter(key => !/\[[1-9]\d*\]/.test(key))

@@ -138,6 +138,7 @@ export default {
           }
         },
         { type: 'selection', width: 60, align: 'center' },
+        { title: 'TAG', width: 80, ellipsis: true, sortable: true, key: 'tags' },
         {
           title: 'Method',
           width: 110,
