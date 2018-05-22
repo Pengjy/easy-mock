@@ -87,6 +87,7 @@ async function createMock (projectId, swaggerDocs) {
   /* istanbul ignore else */
   if (oldAPIs.length > 0) promises.push(MockProxy.updateMany(oldAPIs))
 
+  /* Promise.all 接收一个promises数组当所有的promise都执行完之后才会调用then */
   return Promise.all(promises)
 }
 
