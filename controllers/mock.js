@@ -45,6 +45,30 @@ async function checkByProjectId (projectId, uid) {
   return '项目不存在'
 }
 
+function groupArray (arr, field) {
+  const map = {}
+  const dest = []
+  for (var i = 0; i < arr.length; i++) {
+    var ai = arr[i]
+    if (!map[ai[field]]) {
+      dest.push({
+        tags: ai[field],
+        data: [ai]
+      })
+      map[ai[field]] = ai
+    } else {
+      for (var j = 0; j < dest.length; j++) {
+        var dj = dest[j]
+        if (dj.tags === ai.tags) {
+          dj.data.push(ai)
+          break
+        }
+      }
+    }
+  }
+  return dest
+}
+
 module.exports = class MockController {
   /**
    * 创建接口
@@ -145,6 +169,8 @@ module.exports = class MockController {
     }
 
     mocks = mocks.map(o => _.pick(o, ft.mock))
+
+    mocks = groupArray(mocks, 'tags')
 
     ctx.body = ctx.util.resuccess({ project: project || {}, mocks })
   }

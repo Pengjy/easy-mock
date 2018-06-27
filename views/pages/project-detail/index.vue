@@ -68,12 +68,20 @@
             </Col>
           </Row>
         </div>
-        <Table
-          border
-          :columns="columns"
-          :data="list"
-          @on-selection-change="selectionChange"
-          :highlight-row="true"></Table>
+
+        <Collapse>
+          <Panel v-for="(item,index) in list" :name="item.tags">
+              {{item.tags}}
+              <Table
+                slot="content"
+                border
+                :columns="columns"
+                :data="item.data"
+                @on-selection-change="selectionChange"
+                :highlight-row="true"></Table>
+          </Panel>
+        </Collapse>
+        
       </div>
     </transition>
   </div>
@@ -138,7 +146,6 @@ export default {
           }
         },
         { type: 'selection', width: 60, align: 'center' },
-        { title: 'TAG', width: 80, ellipsis: true, sortable: true, key: 'tags' },
         {
           title: 'Method',
           width: 110,
